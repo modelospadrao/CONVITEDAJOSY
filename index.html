@@ -99,9 +99,11 @@ button.big-btn, .btn {
     margin-bottom: 6px;
 }
 
-/* Pop-up */
+/* ========================================= */
+/* POPUPS — estilo único e padronizado */
+/* ========================================= */
 .popup {
-    display: none;
+    display: none; 
     position: fixed;
     top: 50%; 
     left: 50%;
@@ -118,15 +120,14 @@ button.big-btn, .btn {
     text-align: center;
 }
 
-/* container dos botões lado a lado */
+/* botões SIM / NÃO iguais */
 .popup-buttons {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 12px;
+    margin-top: 16px;
 }
 
-/* Botão SIM */
 .button-yes {
     background-color: #28a745;
     color: white;
@@ -137,8 +138,6 @@ button.big-btn, .btn {
     cursor: pointer;
     flex: 1;
 }
-
-/* Botão NÃO */
 .button-no {
     background-color: #dc3545;
     color: white;
@@ -158,15 +157,33 @@ button.big-btn, .btn {
 
 <body>
 
-<!-- POPUP CORRETO DENTRO DO BODY -->
+<!-- POPUP — solicitar nome (MESMO estilo) -->
+<div id="popupNome" class="popup">
+    ✍️ Antes de confirmar, digite seu primeiro nome.
+    <div class="popup-buttons">
+        <button class="button-yes" onclick="fecharPopupNome()">Ok 👍</button>
+    </div>
+</div>
+    
+<!-- POPUP — resposta NÃO -->
+<div id="popupNao" class="popup">
+    Que pena! Espero te ver na próxima 😞.
+    <div class="popup-buttons">
+        <button class="button-no" onclick="fecharPopupNao()">Ok 👍</button>
+    </div>
+</div>
+
+<!-- POPUP — aviso rodízio (MESMO estilo) -->
 <div id="popupRodizio" class="popup">
-    ⚠️ Aviso importante:<br><br>
-    O evento será em formato RODÍZIO,<br>
-    cada convidado paga sua entrada individualmente.<br><br>
+    ⚠️ AVISO IMPORTANTE:<BR><BR>
+    O EVENTO SERÁ EM FORMATO RODÍZIO,<BR>
+    CADA CONVIDADO PAGA SUA ENTRADA INDIVIDUALMENTE.<BR><BR>
     Confirma sua presença?
-    <br><br>
-    <button class="button-yes" onclick="confirmarRodizio()">Sim 👍</button>
-    <button class="button-no" onclick="cancelarRodizio()">Não ❌</button>
+
+    <div class="popup-buttons">
+        <button class="button-yes" onclick="confirmarRodizio()">Sim 👍</button>
+        <button class="button-no" onclick="cancelarRodizio()">Não ❌</button>
+    </div>
 </div>
 
 <div class="container">
@@ -180,8 +197,8 @@ button.big-btn, .btn {
         <input type="text" id="nome" placeholder="Seu primeiro nome">
 
         <div class="option-buttons">
-            <button class="btn-yes" onclick="enviarResposta('sim')">Vou participar </button>
-            <button class="btn-no" onclick="enviarResposta('nao')">Não irei</button>
+            <button class="btn-yes" onclick="abrirPopup()">Vou participar</button>
+            <button class="btn-no" onclick="abrirPopupNao()">Não irei</button>
         </div>
 
         <div class="location-box">
@@ -202,7 +219,7 @@ button.big-btn, .btn {
 
     </div>
 </div>
-    
+
 <p style="text-align: center; font-style: italic; font-family: 'Courier New', Courier, monospace; margin-top: 40px;">
     © 2025 Emanuel Aguiar<br>
     Todos os direitos reservados.
@@ -211,34 +228,47 @@ button.big-btn, .btn {
 <script>
 let nomeTemp = "";
 
-function enviarResposta(valor) {
+// abrir pop-up certo
+function abrirPopup() {
     let nome = document.getElementById("nome").value.trim();
 
     if (!nome) {
-        alert("Digite seu primeiro nome 😊");
+        document.getElementById("popupNome").style.display = "block";
         return;
     }
 
-    if (valor === "sim") {
-        nomeTemp = nome;
-        document.getElementById("popupRodizio").style.display = "block";
-    } else {
-        alert(`Que pena ${nome}! Espero te ver na próxima 😞`);
-    }
+    nomeTemp = nome;
+    document.getElementById("popupRodizio").style.display = "block";
 }
 
+// fechar pop-up nome
+function fecharPopupNome() {
+    document.getElementById("popupNome").style.display = "none";
+}
+
+// Função para abrir o pop-up de "Não irei" sem pedir o nome
+function abrirPopupNao() {
+    document.getElementById("popupNao").style.display = "block";  // Mostrar o pop-up de "Não irei"
+}
+
+// Função para fechar o pop-up de "Não irei"
+function fecharPopupNao() {
+    document.getElementById("popupNao").style.display = "none";
+}
+
+// confirmar rodízio = vai para WhatsApp
 function confirmarRodizio() {
-    let tel = "5585986849656"; 
+    let tel = "5585986849656";
     let msg = encodeURIComponent(`Olá! Aqui é ${nomeTemp}, confirmo minha presença no evento.`);
     window.open(`https://wa.me/${tel}?text=${msg}`, "_blank");
-    document.getElementById("popupRodizio").style.display = "none";
+    cancelarRodizio();
 }
 
+// fecha pop-up rodízio
 function cancelarRodizio() {
     document.getElementById("popupRodizio").style.display = "none";
 }
 </script>
-
 
 </body>
 </html>
