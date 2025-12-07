@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmação de presença</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f2e5;
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.banner {
+    width: 100%;
+    display: block;
+}
+
+.content {
+    padding: 18px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 10px;
+    color: #5b2d0a;
+    font-size: 22px;
+}
+
+label {
+    display: block;
+    font-size: 18px;
+    margin: 8px;
+}
+
+button, a.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:active, a.btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-whatsapp {
+    background: #25D366;
+}
+
+.btn-location {
+    background: #007bff;
+}
+
+.btn-instagram {
+    background: #C13584;
+}
+</style>
+
+<script>
+function confirmar() {
+    let escolha = document.querySelector('input[name="presenca"]:checked');
+
+    if (!escolha) {
+        alert("Por favor, selecione uma opção.");
+        return;
+    }
+
+    if (escolha.value === "sim") {
+        let tel = "SEUNUMEROAQUI"; 
+        let msg = encodeURIComponent("Olá! Confirmo minha presença no evento.");
+        window.open(`https://wa.me/${tel}?text=${msg}`, "_blank");
+    } else {
+        alert("Que pena! Talvez na próxima 😊");
+    }
+}
+</script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- sua imagem -->
+    <img src="banner.jpg" class="banner" alt="Convite do Evento">
+
+    <div class="content">
+
+        <h2>Confirmar presença</h2>
+
+        <label><input type="radio" name="presenca" value="sim"> Vou participar 🎉</label>
+        <label><input type="radio" name="presenca" value="nao"> Não irei participar 😞</label>
+
+        <button onclick="confirmar()" class="btn-whatsapp">Enviar Confirmação</button>
+
+        <a href="https://www.instagram.com/fazendinhacountrybar/?igsh=dzQyem5zcTFxa2c1#" class="btn btn-instagram" target="_blank">
+            Ver Local no Instagram 📌
+        </a>
+
+        <a href="https://maps.app.goo.gl/mjZoGb9TNQDvqVsk9" class="btn btn-location" target="_blank">
+            Abrir Rota no Google Maps 🚗
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>
