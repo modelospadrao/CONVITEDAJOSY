@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 420px;
+    max-width: 450px;
     margin: auto;
     background: #fff;
     border-radius: 12px;
@@ -49,7 +49,7 @@ input[type="text"] {
 .option-buttons {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 38px;
     margin-bottom: 16px;
 }
 
@@ -69,7 +69,7 @@ input[type="text"] {
 .btn-no { background: #dc3545; }
 
 button.big-btn, .btn {
-    width: 100%;
+    width: 94%;
     display: block;
     text-align: center;
     padding: 14px;
@@ -110,7 +110,7 @@ function enviarResposta(valor) {
     }
 
     if (valor === "sim") {
-        let tel = "SEUNUMEROAQUI"; 
+        let tel = "5585986849656"; 
         let msg = encodeURIComponent(`Olá! Aqui é ${nome}, confirmo minha presença no evento.`);
         window.open(`https://wa.me/${tel}?text=${msg}`, "_blank");
     } else {
