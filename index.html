@@ -32,20 +32,46 @@ body {
 }
 
 h2 {
-    margin-top: 10px;
+    margin: 10px 0;
     color: #5b2d0a;
     font-size: 22px;
 }
 
-label {
-    display: block;
-    font-size: 18px;
-    margin: 8px;
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    margin-bottom: 12px;
 }
 
-button, a.btn {
-    display: block;
+.option-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.option-buttons button {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.btn-yes { background: #28a745; }
+.btn-no { background: #dc3545; }
+
+button.big-btn, .btn {
     width: 100%;
+    display: block;
+    text-align: center;
     padding: 14px;
     font-size: 18px;
     border-radius: 8px;
@@ -56,42 +82,39 @@ button, a.btn {
     color: #fff;
     font-weight: bold;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-button:active, a.btn:active {
-    transform: scale(0.97);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
+.btn-instagram { background: #C13584; }
+.btn-location  { background: #007bff; }
 
-.btn-whatsapp {
-    background: #25D366;
+.location-box {
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 16px;
+    font-size: 15px;
 }
-
-.btn-location {
-    background: #007bff;
-}
-
-.btn-instagram {
-    background: #C13584;
+.location-box strong {
+    display: block;
+    margin-bottom: 6px;
 }
 </style>
 
 <script>
-function confirmar() {
-    let escolha = document.querySelector('input[name="presenca"]:checked');
+function enviarResposta(valor) {
+    let nome = document.getElementById("nome").value.trim();
 
-    if (!escolha) {
-        alert("Por favor, selecione uma opção.");
+    if (!nome) {
+        alert("Digite seu primeiro nome 😊");
         return;
     }
 
-    if (escolha.value === "sim") {
+    if (valor === "sim") {
         let tel = "SEUNUMEROAQUI"; 
-        let msg = encodeURIComponent("Olá! Confirmo minha presença no evento.");
+        let msg = encodeURIComponent(`Olá! Aqui é ${nome}, confirmo minha presença no evento.`);
         window.open(`https://wa.me/${tel}?text=${msg}`, "_blank");
     } else {
-        alert("Que pena! Talvez na próxima 😊");
+        alert(`Que pena ${nome}! Espero te ver na próxima 😞`);
     }
 }
 </script>
@@ -101,26 +124,34 @@ function confirmar() {
 
 <div class="container">
 
-    <!-- sua imagem -->
-    <img src="banner.jpg" class="banner" alt="Convite do Evento">
+    <img src="banner.jpg" class="banner">
 
     <div class="content">
 
         <h2>Confirmar presença</h2>
 
-        <label><input type="radio" name="presenca" value="sim"> Vou participar 🎉</label>
-        <label><input type="radio" name="presenca" value="nao"> Não irei participar 😞</label>
+        <input type="text" id="nome" placeholder="Seu primeiro nome">
 
-        <button onclick="confirmar()" class="btn-whatsapp">Enviar Confirmação</button>
+        <div class="option-buttons">
+            <button class="btn-yes" onclick="enviarResposta('sim')">Vou participar 🎉</button>
+            <button class="btn-no" onclick="enviarResposta('nao')">Não irei 😞</button>
+        </div>
 
-        <a href="https://www.instagram.com/fazendinhacountrybar/?igsh=dzQyem5zcTFxa2c1#" class="btn btn-instagram" target="_blank">
-            Ver Local no Instagram 📌
+        <div class="location-box">
+            <strong>📍 Local do Evento</strong>
+            Fazendinha Country Bar <br>
+            Rua Gustavo Sampaio, 2500
+        </div>
+
+        <a href="https://www.instagram.com/fazendinhacountrybar/?igsh=dzQyem5zcTFxa2c1#" 
+           class="btn btn-instagram" target="_blank">
+           Ver Local no Instagram 📌
         </a>
 
-        <a href="https://maps.app.goo.gl/mjZoGb9TNQDvqVsk9" class="btn btn-location" target="_blank">
-            Abrir Rota no Google Maps 🚗
+        <a href="https://maps.app.goo.gl/mjZoGb9TNQDvqVsk9" 
+           class="btn btn-location" target="_blank">
+           Abrir rota no Google Maps 🚗
         </a>
-
     </div>
 </div>
 
